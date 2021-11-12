@@ -142,6 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: ca5ababb5ff588b4889657e45a35b972, type: 2}
   moveSpeed: 6
+  accelerationTime: 0.2
+  decelerationTime: 0.2
+  moveRotationAngle: 25
+  paddingX: 0.8
+  paddingY: 0.22
 --- !u!50 &394476069
 Rigidbody2D:
   serializedVersion: 4
@@ -172,6 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427053825}
+  - component: {fileID: 427053826}
   m_Layer: 0
   m_Name: Enviroment
   m_TagString: Untagged
@@ -195,6 +201,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &427053826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427053824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d892de2bfd4029b49b6fcce86fbd3bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &568673001
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +618,7 @@ GameObject:
   - component: {fileID: 1999411105}
   - component: {fileID: 1999411104}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Simple Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,7 +708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999411103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.58815396, y: 0.068598665, z: 3.7004547}
+  m_LocalPosition: {x: 0, y: 0, z: 15}
   m_LocalScale: {x: 25.8, y: 10.3, z: 1}
   m_Children: []
   m_Father: {fileID: 427053825}
