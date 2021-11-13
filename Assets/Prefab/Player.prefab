@@ -29030,7 +29030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6435389010079767248}
   m_Layer: 6
-  m_Name: Star Sparrow 01
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
