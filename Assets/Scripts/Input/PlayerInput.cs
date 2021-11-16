@@ -11,6 +11,8 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
     public event UnityAction<Vector2> onMove = delegate { };
     //停止移动事件
     public event UnityAction onStopMove = delegate { };
+    public event UnityAction onFire = delegate { };
+    public event UnityAction onStopFire = delegate { };
     InputActions inputActions;
 
     void OnEnable()
@@ -51,6 +53,18 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
         if (context.phase == InputActionPhase.Canceled)
         {
             onStopMove.Invoke();
+        }
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            onFire.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            onStopFire.Invoke();
         }
     }
 }

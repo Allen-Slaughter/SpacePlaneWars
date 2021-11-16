@@ -14,7 +14,12 @@ public class Player : MonoBehaviour
     [SerializeField] float paddingX = 0.2f;
     [SerializeField] float paddingY = 0.2f;
 
+    [SerializeField] GameObject projectile;
+    [SerializeField] Transform muzzle;
+    [SerializeField] float fireInterval = 0.2f;
 
+
+    WaitForSeconds waitForFireInterval;
     new Rigidbody2D rigidbody;
     Coroutine moveCoroutine;
 
@@ -27,21 +32,29 @@ public class Player : MonoBehaviour
     {
         input.onMove += Move;
         input.onStopMove += StopMove;
+        input.onFire += Fire;
+        input.onStopFire += StopFire;
     }
 
     void OnDisable()
     {
         input.onMove -= Move;
         input.onStopMove -= StopMove;
+        input.onFire -= Fire;
+        input.onStopFire -= StopFire;
     }
 
     void Start()
     {
         rigidbody.gravityScale = 0f;
+
+        waitForFireInterval = new WaitForSeconds(fireInterval);
+
         //开始操作角色时激活Game play动作表
         input.EnableGamePlayInput();
     }
 
+    #region MOVE
     //事件处理函数
     void Move(Vector2 moveInput)
     {
@@ -88,4 +101,28 @@ public class Player : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
+
+    #region FIRE
+    void Fire()
+    {
+        StartCoroutine(nameof(FireCoroutine));
+    }
+
+    void StopFire()
+    {
+        StopCoroutine(nameof(FireCoroutine));
+    }
+
+    IEnumerator FireCoroutine()
+    {
+        while (true)
+        {
+            Instantiate(projectile, muzzle.position, Quaternion.identity);
+
+            yield return waitForFireInterval;
+        }
+    }
+
+    #endregion
 }
