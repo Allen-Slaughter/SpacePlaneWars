@@ -15,7 +15,12 @@ public class Player : MonoBehaviour
     [SerializeField] float paddingY = 0.2f;
 
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform muzzle;
+    [SerializeField] GameObject projectile1;
+    [SerializeField] GameObject projectile2;
+    [SerializeField] Transform muzzleMiddle;
+    [SerializeField] Transform muzzleTop;
+    [SerializeField] Transform muzzleBottom;
+    [SerializeField, Range(0, 2)] int weaponPower = 0;
     [SerializeField] float fireInterval = 0.2f;
 
 
@@ -118,7 +123,24 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(projectile, muzzle.position, Quaternion.identity);
+            switch (weaponPower)
+            {
+                case 0:
+                    PoolManager.Release(projectile, muzzleMiddle.position);
+                    break;
+                case 1:
+                    PoolManager.Release(projectile, muzzleTop.position);
+                    PoolManager.Release(projectile, muzzleBottom.position);
+                    break;
+                case 2:
+                    Debug.Log("WeaponPower is 2");
+                    PoolManager.Release(projectile, muzzleMiddle.position);
+                    PoolManager.Release(projectile1, muzzleTop.position);
+                    PoolManager.Release(projectile2, muzzleBottom.position);
+                    break;
+                default:
+                    break;
+            }
 
             yield return waitForFireInterval;
         }

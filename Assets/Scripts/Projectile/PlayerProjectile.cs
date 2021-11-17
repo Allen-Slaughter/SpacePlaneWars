@@ -4,5 +4,15 @@ using UnityEngine;
 
 public class PlayerProjectile : Projectile
 {
+    TrailRenderer trail;
 
+    void Awake()
+    {
+        trail = GetComponentInChildren<TrailRenderer>();
+    }
+
+    void OnDisable()
+    {
+        trail.Clear();
+    }
 }
