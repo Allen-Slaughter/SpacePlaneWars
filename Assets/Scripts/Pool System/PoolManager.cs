@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     [SerializeField] Pool[] playerProjectilePools;
+    [SerializeField] Pool[] enemyProjectilePools;
 
     static Dictionary<GameObject, Pool> dictionary;
 
@@ -13,12 +14,14 @@ public class PoolManager : MonoBehaviour
         dictionary = new Dictionary<GameObject, Pool>();
 
         Initialize(playerProjectilePools);
+        Initialize(enemyProjectilePools);
     }
 
 #if UNITY_EDITOR
     void OnDestroy()
     {
         CheckPoolSize(playerProjectilePools);
+        CheckPoolSize(enemyProjectilePools);
     }
 #endif
 
@@ -83,6 +86,18 @@ public class PoolManager : MonoBehaviour
         return dictionary[prefab].PreparedObject();
     }
 
+    /// <summary>
+    /// <para>Release a specified prepared gameObject in the pool at specified position.</para>
+    /// <para>根据传入的prefab参数.在position参数位置释放对象池中预备好的游戏对象</para>
+    /// </summary>
+    /// <param name="prefab">
+    /// <para>Specified gameObject prefab.</para>
+    /// <para>指定的游戏对象预制体.</para>
+    /// </param>
+    /// <returns>
+    /// <para>Specified release position.</para>
+    /// <para>指定释放位置.</para>
+    /// </returns>
     public static GameObject Release(GameObject prefab, Vector3 position)
     {
 #if UNITY_EDITOR
@@ -96,6 +111,23 @@ public class PoolManager : MonoBehaviour
         return dictionary[prefab].PreparedObject(position);
     }
 
+    /// <summary>
+    /// <para>Release a specified prepared gameObject in the pool at specified position and rotation.</para>
+    /// <para>根据传入的prefab参数和rotation参数.在position参数位置释放对象池中预备好的游戏对象</para>
+    /// </summary>
+    /// <param name="prefab">
+    /// <para>Specified gameObject prefab.</para>
+    /// <para>指定的游戏对象预制体.</para>
+    /// </param>
+    /// <param name="position">
+    /// <para>Specified release position.</para>
+    /// <para>指定释放位置.</para>
+    /// </param>
+    /// <param name="rotation">
+    /// <para>Specified rotation.</para>
+    /// <para>指定的旋转值.</para>
+    /// </param>
+    /// <returns></returns>
     public static GameObject Release(GameObject prefab, Vector3 position, Quaternion rotation)
     {
 #if UNITY_EDITOR
@@ -109,6 +141,27 @@ public class PoolManager : MonoBehaviour
         return dictionary[prefab].PreparedObject(position, rotation);
     }
 
+    /// <summary>
+    /// <para>Release a specified prepared gameObject in the pool at specified position， rotation and localScale.</para>
+    /// <para>根据传入的prefab参数,rotation参数和localScale参数.在position参数位置释放对象池中预备好的游戏对象</para>
+    /// </summary>
+    /// <param name="prefab">
+    /// <para>Specified gameObject prefab.</para>
+    /// <para>指定的游戏对象预制体.</para>
+    /// </param>
+    /// <param name="position">
+    /// <para>Specified release position.</para>
+    /// <para>指定释放位置.</para>
+    /// </param>
+    /// <param name="rotation">
+    /// <para>Specified rotation.</para>
+    /// <para>指定的旋转值.</para>
+    /// </param>
+    /// <param name="localScale">
+    /// <para>Specified scale.</para>
+    /// <para>指定的缩放值.</para>
+    /// </param>
+    /// <returns></returns>
     public static GameObject Release(GameObject prefab, Vector3 position, Quaternion rotation, Vector3 localScale)
     {
 #if UNITY_EDITOR

@@ -133,7 +133,6 @@ public class Player : MonoBehaviour
                     PoolManager.Release(projectile, muzzleBottom.position);
                     break;
                 case 2:
-                    Debug.Log("WeaponPower is 2");
                     PoolManager.Release(projectile, muzzleMiddle.position);
                     PoolManager.Release(projectile1, muzzleTop.position);
                     PoolManager.Release(projectile2, muzzleBottom.position);
