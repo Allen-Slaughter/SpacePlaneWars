@@ -45,12 +45,12 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
     public void OnMove(InputAction.CallbackContext context)
     {
         //开始移动事件的触发
-        if (context.phase == InputActionPhase.Performed)
+        if (context.performed)
         {
             onMove.Invoke(context.ReadValue<Vector2>());
         }
         //停止移动事件的触发
-        if (context.phase == InputActionPhase.Canceled)
+        if (context.canceled)
         {
             onStopMove.Invoke();
         }
@@ -58,11 +58,11 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.performed)
         {
             onFire.Invoke();
         }
-        if (context.phase == InputActionPhase.Canceled)
+        if (context.canceled)
         {
             onStopFire.Invoke();
         }

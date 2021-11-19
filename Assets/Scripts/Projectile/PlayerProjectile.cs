@@ -12,7 +12,7 @@ public class PlayerProjectile : Projectile
 
         if (moveDirection != Vector2.right)
         {
-            transform.rotation = Quaternion.FromToRotation(Vector2.right, moveDirection);
+            transform.GetChild(0).rotation = Quaternion.FromToRotation(Vector2.right, moveDirection);
         }
     }
 

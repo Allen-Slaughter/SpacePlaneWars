@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5303842395310646905}
   - component: {fileID: 5303842395310646904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,12 +24,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5303842395310646910}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.085, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5303842395408885935}
-  m_RootOrder: 1
+  m_Father: {fileID: 5303842395925749697}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &5303842395310646904
 TrailRenderer:
@@ -148,8 +148,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5303842395408885935}
   - component: {fileID: 5303842395408885934}
-  - component: {fileID: 2299676564936372565}
-  m_Layer: 0
+  - component: {fileID: 8362907502922064516}
+  - component: {fileID: 7164314416060455173}
+  m_Layer: 8
   m_Name: Player Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +169,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5303842395925749697}
-  - {fileID: 5303842395310646905}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -184,9 +184,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ef97954983a2b4ebd2cac839b99eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitVFX: {fileID: 5060298685065931927, guid: 6775c68a79b34db4fa2fd4db2a4cdf74, type: 3}
+  damage: 1
   moveSpeed: 15
   moveDirection: {x: 1, y: 0}
---- !u!114 &2299676564936372565
+--- !u!70 &8362907502922064516
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5303842395408885932}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04, y: 0}
+  m_Size: {x: 0.25, y: 0.1}
+  m_Direction: 1
+--- !u!114 &7164314416060455173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,11 +213,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5303842395408885932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0196a5709ceafe4f8212113b7f24b79, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b5f7379fc3e59144bf1f0f30d8a22ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destroyGameObject: 0
-  lifeTime: 3
+  lifetime: 3
 --- !u!1 &5303842395925749702
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +229,7 @@ GameObject:
   - component: {fileID: 5303842395925749697}
   - component: {fileID: 5303842395925749699}
   - component: {fileID: 5303842395925749696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +246,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5303842395310646905}
   m_Father: {fileID: 5303842395408885935}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -4989,7 +5008,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0

@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player : Character
 {
+    [SerializeField] bool regenerateHealth = true;
+    [SerializeField] float healthRegenerateTime;
+    [SerializeField, Range(0f, 1f)] float healthRegeneratePercent;
+
+    [Header("---- INPUT ----")]
     [SerializeField] PlayerInput input;
 
+    [Header("---- MOVE ----")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float accelerationTime = 3f;
     [SerializeField] float decelerationTime = 3f;
@@ -14,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] float paddingX = 0.2f;
     [SerializeField] float paddingY = 0.2f;
 
+    [Header("---- FIRE ----")]
     [SerializeField] GameObject projectile;
     [SerializeField] GameObject projectile1;
     [SerializeField] GameObject projectile2;
@@ -25,16 +32,20 @@ public class Player : MonoBehaviour
 
 
     WaitForSeconds waitForFireInterval;
+    WaitForSeconds waitHealthRegenerateTime;
     new Rigidbody2D rigidbody;
     Coroutine moveCoroutine;
+    Coroutine healthRegenerateCoroutine;
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         input.onMove += Move;
         input.onStopMove += StopMove;
         input.onFire += Fire;
@@ -54,9 +65,28 @@ public class Player : MonoBehaviour
         rigidbody.gravityScale = 0f;
 
         waitForFireInterval = new WaitForSeconds(fireInterval);
+        waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
 
         //开始操作角色时激活Game play动作表
         input.EnableGamePlayInput();
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        if (gameObject.activeSelf)
+        {
+            if (regenerateHealth)
+            {
+                if (healthRegenerateCoroutine != null)
+                {
+                    StopCoroutine(healthRegenerateCoroutine);
+                }
+
+                healthRegenerateCoroutine = StartCoroutine(HealthRegenerateCoroutine(waitHealthRegenerateTime, healthRegeneratePercent));
+            }
+        }
     }
 
     #region MOVE
@@ -89,7 +119,7 @@ public class Player : MonoBehaviour
 
         while (t < time)
         {
-            t += Time.fixedDeltaTime / time;
+            t += Time.fixedDeltaTime;
             rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, moveVelocity, t / time);
             transform.rotation = Quaternion.Lerp(transform.rotation, moveRotation, t / time);
 
