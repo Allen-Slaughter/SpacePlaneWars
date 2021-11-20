@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Character
 {
+    [SerializeField] StatsBar_HUD statsBar_HUD;
     [SerializeField] bool regenerateHealth = true;
     [SerializeField] float healthRegenerateTime;
     [SerializeField, Range(0f, 1f)] float healthRegeneratePercent;
@@ -67,6 +68,8 @@ public class Player : Character
         waitForFireInterval = new WaitForSeconds(fireInterval);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
 
+        statsBar_HUD.Initialize(health, maxHealth);
+
         //开始操作角色时激活Game play动作表
         input.EnableGamePlayInput();
     }
@@ -74,6 +77,7 @@ public class Player : Character
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        statsBar_HUD.UpdateStats(health, maxHealth);
 
         if (gameObject.activeSelf)
         {
@@ -87,6 +91,18 @@ public class Player : Character
                 healthRegenerateCoroutine = StartCoroutine(HealthRegenerateCoroutine(waitHealthRegenerateTime, healthRegeneratePercent));
             }
         }
+    }
+
+    public override void RestoreHealth(float value)
+    {
+        base.RestoreHealth(value);
+        statsBar_HUD.UpdateStats(health, maxHealth);
+    }
+
+    public override void Die()
+    {
+        statsBar_HUD.UpdateStats(0f, maxHealth);
+        base.Die();
     }
 
     #region MOVE
