@@ -14676,6 +14676,7 @@ MonoBehaviour:
   maxHealth: 8
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 6284427232189346834}
+  deathEnegryBonus: 4
 --- !u!1001 &377742027313146975
 PrefabInstance:
   m_ObjectHideFlags: 0

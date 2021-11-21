@@ -26,6 +26,11 @@ public class StatsBar : MonoBehaviour
         waitForDelayFill = new WaitForSeconds(fillDelay);
     }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     public virtual void Initialize(float currentValue, float maxValue)
     {
         currentFillAmount = currentValue / maxValue;
@@ -50,6 +55,7 @@ public class StatsBar : MonoBehaviour
             fillImageFront.fillAmount = targetFillAmount;
             //slowly reduce fill image back's fill amount   慢慢减少后面图片的填充值
             bufferedFillingCoroutine = StartCoroutine(BufferedFillingCoroutine(fillImageBack));
+            return;
         }
 
         //if stats increase     当状态值增加时

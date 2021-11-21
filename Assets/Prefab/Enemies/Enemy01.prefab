@@ -142,6 +142,7 @@ MonoBehaviour:
   maxHealth: 12
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 4326087800521952267}
+  deathEnegryBonus: 5
 --- !u!1 &2100968527171872563
 GameObject:
   m_ObjectHideFlags: 0
