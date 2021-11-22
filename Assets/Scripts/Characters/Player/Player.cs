@@ -31,16 +31,31 @@ public class Player : Character
     [SerializeField, Range(0, 2)] int weaponPower = 0;
     [SerializeField] float fireInterval = 0.2f;
 
+    [Header("---- DODGE ----")]
+    [SerializeField, Range(0, 100)] int dodgeEnegryCost = 25;
+    [SerializeField] float maxRoll = 720f;
+    [SerializeField] float rollSpeed = 360f;
+    [SerializeField] Vector3 dodgeScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+    bool isDodging = false;
+    float currentRoll;
+    float dodgeDuration;
 
     WaitForSeconds waitForFireInterval;
     WaitForSeconds waitHealthRegenerateTime;
-    new Rigidbody2D rigidbody;
+
     Coroutine moveCoroutine;
     Coroutine healthRegenerateCoroutine;
+
+    new Rigidbody2D rigidbody;
+    new Collider2D collider;
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
+
+        dodgeDuration = maxRoll / rollSpeed;
     }
 
     protected override void OnEnable()
@@ -51,6 +66,7 @@ public class Player : Character
         input.onStopMove += StopMove;
         input.onFire += Fire;
         input.onStopFire += StopFire;
+        input.onDodge += Dodge;
     }
 
     void OnDisable()
@@ -59,6 +75,7 @@ public class Player : Character
         input.onStopMove -= StopMove;
         input.onFire -= Fire;
         input.onStopFire -= StopFire;
+        input.onDodge -= Dodge;
     }
 
     void Start()
@@ -155,6 +172,7 @@ public class Player : Character
     #endregion
 
     #region FIRE
+
     void Fire()
     {
         StartCoroutine(nameof(FireCoroutine));
@@ -191,5 +209,41 @@ public class Player : Character
         }
     }
 
+    #endregion
+
+    #region 
+    void Dodge()
+    {
+        if (isDodging || !PlayerEnergy.Instance.IsEnough(dodgeEnegryCost)) return;
+
+        StartCoroutine(nameof(DodgeCoroutine));
+    }
+
+    IEnumerator DodgeCoroutine()
+    {
+        isDodging = true;
+        //Cost enegry   消耗能量
+        PlayerEnergy.Instance.Use(dodgeEnegryCost);
+
+        //Make player invincible    让玩家无敌
+        collider.isTrigger = true;
+
+        //Make player rotato along X axis   让玩家沿着X轴旋转
+        currentRoll = 0f;
+
+        while (currentRoll < maxRoll)
+        {
+            currentRoll += rollSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.AngleAxis(currentRoll, Vector3.right);
+
+            //Change player's scale     改变玩家大小
+            transform.localScale = BezierCurve.QuadraticPoint(Vector3.one, Vector3.one, dodgeScale, currentRoll / maxRoll);
+
+            yield return null;
+        }
+
+        collider.isTrigger = false;
+        isDodging = false;
+    }
     #endregion
 }
