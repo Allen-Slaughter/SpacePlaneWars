@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Character
 {
+    #region FIELDS
     [SerializeField] StatsBar_HUD statsBar_HUD;
     [SerializeField] bool regenerateHealth = true;
     [SerializeField] float healthRegenerateTime;
@@ -50,6 +51,9 @@ public class Player : Character
     new Rigidbody2D rigidbody;
     new Collider2D collider;
 
+    #endregion
+
+    #region UNITY EVENT FUNCTIONS
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -90,7 +94,9 @@ public class Player : Character
         //开始操作角色时激活Game play动作表
         input.EnableGamePlayInput();
     }
+    #endregion
 
+    #region HEALTH
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
@@ -121,6 +127,7 @@ public class Player : Character
         statsBar_HUD.UpdateStats(0f, maxHealth);
         base.Die();
     }
+    #endregion
 
     #region MOVE
     //事件处理函数
@@ -142,7 +149,7 @@ public class Player : Character
             StopCoroutine(moveCoroutine);
         }
         moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, Vector2.zero, Quaternion.identity));
-        StopCoroutine(MovePositionLimitCoroutine());
+        StopCoroutine(nameof(MovePositionLimitCoroutine));
     }
 
 
@@ -211,7 +218,7 @@ public class Player : Character
 
     #endregion
 
-    #region 
+    #region DODGE
     void Dodge()
     {
         if (isDodging || !PlayerEnergy.Instance.IsEnough(dodgeEnegryCost)) return;
