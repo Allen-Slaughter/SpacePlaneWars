@@ -29,10 +29,12 @@ public class Player : Character
     [SerializeField] Transform muzzleMiddle;
     [SerializeField] Transform muzzleTop;
     [SerializeField] Transform muzzleBottom;
+    [SerializeField] AudioData projectileLaunchSFX;
     [SerializeField, Range(0, 2)] int weaponPower = 0;
     [SerializeField] float fireInterval = 0.2f;
 
     [Header("---- DODGE ----")]
+    [SerializeField] AudioData dodgeSFX;
     [SerializeField, Range(0, 100)] int dodgeEnegryCost = 25;
     [SerializeField] float maxRoll = 720f;
     [SerializeField] float rollSpeed = 360f;
@@ -212,6 +214,8 @@ public class Player : Character
                     break;
             }
 
+            AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
+
             yield return waitForFireInterval;
         }
     }
@@ -229,6 +233,7 @@ public class Player : Character
     IEnumerator DodgeCoroutine()
     {
         isDodging = true;
+        AudioManager.Instance.PlayRandomSFX(dodgeSFX);
         //Cost enegry   消耗能量
         PlayerEnergy.Instance.Use(dodgeEnegryCost);
 
