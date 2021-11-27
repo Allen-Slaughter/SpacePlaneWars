@@ -12,6 +12,7 @@ public class StatsBar : MonoBehaviour
     [SerializeField] float fillSpeed = 0.1f;
     float currentFillAmount;
     protected float targetFillAmount;
+    float previousFillAmount;
     float t;
 
     WaitForSeconds waitForDelayFill;
@@ -55,6 +56,7 @@ public class StatsBar : MonoBehaviour
             fillImageFront.fillAmount = targetFillAmount;
             //slowly reduce fill image back's fill amount   慢慢减少后面图片的填充值
             bufferedFillingCoroutine = StartCoroutine(BufferedFillingCoroutine(fillImageBack));
+
             return;
         }
 
@@ -75,12 +77,13 @@ public class StatsBar : MonoBehaviour
         {
             yield return waitForDelayFill;
         }
+        previousFillAmount = currentFillAmount;
         t = 0f;
 
         while (t < 1f)
         {
             t += Time.deltaTime * fillSpeed;
-            currentFillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, t);
+            currentFillAmount = Mathf.Lerp(previousFillAmount, targetFillAmount, t);
             image.fillAmount = currentFillAmount;
 
             yield return null;

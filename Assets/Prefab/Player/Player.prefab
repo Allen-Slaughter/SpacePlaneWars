@@ -29212,8 +29212,8 @@ MonoBehaviour:
   healthRegeneratePercent: 0.02
   input: {fileID: 11400000, guid: ca5ababb5ff588b4889657e45a35b972, type: 2}
   moveSpeed: 6
-  accelerationTime: 0.2
-  decelerationTime: 0.2
+  accelerationTime: 0.35
+  decelerationTime: 0.75
   moveRotationAngle: 25
   paddingX: 0.8
   paddingY: 0.22

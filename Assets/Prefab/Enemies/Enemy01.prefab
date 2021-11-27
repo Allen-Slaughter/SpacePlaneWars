@@ -14700,10 +14700,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Health Bar On Head Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 5432093878983272730, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7129499763891812797, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
