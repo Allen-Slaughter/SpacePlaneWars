@@ -381,12 +381,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276624503}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.95, y: 0.05, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.95, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6435389009486221734}
-  m_RootOrder: 5
+  m_Father: {fileID: 737298100}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &276624503
 GameObject:
@@ -469,10 +469,10 @@ RectTransform:
   m_Father: {fileID: 560760110}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 463.5, y: -12.499998}
-  m_SizeDelta: {x: 96.999985, y: 24.999996}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410288966
 MonoBehaviour:
@@ -690,12 +690,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644403828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.95, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6435389009486221734}
-  m_RootOrder: 4
+  m_Father: {fileID: 737298100}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &673476272
 GameObject:
@@ -867,6 +867,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698328875}
   m_CullTransparentMesh: 1
+--- !u!1 &737298099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 737298100}
+  m_Layer: 6
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &737298100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737298099}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 276624500}
+  - {fileID: 644403829}
+  - {fileID: 864424017}
+  m_Father: {fileID: 6435389009486221734}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759251103
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,12 +971,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864424016}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.95, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6435389009486221734}
-  m_RootOrder: 6
+  m_Father: {fileID: 737298100}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &966475637
 GameObject:
@@ -1442,9 +1475,10 @@ MonoBehaviour:
   moveRotationAngle: 25
   paddingX: 0.8
   paddingY: 0.22
-  projectile: {fileID: 5303842395408885932, guid: 84e5b62e663792f44a8593eb3d0ebfbc, type: 3}
-  projectile1: {fileID: 5303842395408885932, guid: f57c98ed5c3a3b94e873c5b98234b137, type: 3}
-  projectile2: {fileID: 5303842395408885932, guid: 067bbd12d38868f4b99070a7d3779bb8, type: 3}
+  projectile1: {fileID: 5303842395408885932, guid: 84e5b62e663792f44a8593eb3d0ebfbc, type: 3}
+  projectile2: {fileID: 5303842395408885932, guid: f57c98ed5c3a3b94e873c5b98234b137, type: 3}
+  projectile3: {fileID: 5303842395408885932, guid: 067bbd12d38868f4b99070a7d3779bb8, type: 3}
+  projectileOverdirve: {fileID: 5303842395408885932, guid: b22c3e8f1efd7984a8029eab225f48fc, type: 3}
   muzzleMiddle: {fileID: 644403829}
   muzzleTop: {fileID: 276624500}
   muzzleBottom: {fileID: 864424017}
@@ -1978,10 +2012,10 @@ RectTransform:
   m_Father: {fileID: 560760110}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 407, y: -65.99999}
-  m_SizeDelta: {x: 209.99997, y: 41.999996}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1653331216
 MonoBehaviour:
@@ -2709,6 +2743,8 @@ MonoBehaviour:
     size: 30
   - prefab: {fileID: 5303842395408885932, guid: 067bbd12d38868f4b99070a7d3779bb8, type: 3}
     size: 30
+  - prefab: {fileID: 5303842395408885932, guid: b22c3e8f1efd7984a8029eab225f48fc, type: 3}
+    size: 90
   enemyProjectilePools:
   - prefab: {fileID: 1355204847615744768, guid: f509364ca610c9d48994de02c0c80a5a, type: 3}
     size: 10
@@ -2724,9 +2760,11 @@ MonoBehaviour:
   - prefab: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
     size: 1
   - prefab: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
-    size: 10
+    size: 13
   - prefab: {fileID: 5060298685065931927, guid: 6775c68a79b34db4fa2fd4db2a4cdf74, type: 3}
     size: 15
+  - prefab: {fileID: 5060298685065931927, guid: 6469b8370f72a3a49a9bc0d2803693eb, type: 3}
+    size: 30
   - prefab: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
     size: 3
 --- !u!4 &2048920109
@@ -85217,7 +85255,7 @@ RectTransform:
   - {fileID: 6051865385771408784}
   - {fileID: 6494014542241223940}
   m_Father: {fileID: 6435389009486221734}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -95231,10 +95269,8 @@ Transform:
   - {fileID: 6435389010561529564}
   - {fileID: 9087891113205990577}
   - {fileID: 4775338652045312834}
-  - {fileID: 644403829}
-  - {fileID: 276624500}
-  - {fileID: 864424017}
   - {fileID: 4940315072193357998}
+  - {fileID: 737298100}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

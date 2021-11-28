@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3488799984586971651}
   - component: {fileID: 6182393277995536946}
   m_Layer: 0
-  m_Name: VFX_PlayerProjectileHit
+  m_Name: VFX_PlayerProjectileHitNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

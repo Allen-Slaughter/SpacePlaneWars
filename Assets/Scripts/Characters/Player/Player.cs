@@ -23,9 +23,10 @@ public class Player : Character
     [SerializeField] float paddingY = 0.2f;
 
     [Header("---- FIRE ----")]
-    [SerializeField] GameObject projectile;
     [SerializeField] GameObject projectile1;
     [SerializeField] GameObject projectile2;
+    [SerializeField] GameObject projectile3;
+    [SerializeField] GameObject projectileOverdirve;
     [SerializeField] Transform muzzleMiddle;
     [SerializeField] Transform muzzleTop;
     [SerializeField] Transform muzzleBottom;
@@ -59,6 +60,7 @@ public class Player : Character
     WaitForSeconds waitForFireInterval;
     WaitForSeconds waitForOverdirveFireInterval;
     WaitForSeconds waitHealthRegenerateTime;
+    WaitForSeconds waitDecelerationTime;
 
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
@@ -82,6 +84,7 @@ public class Player : Character
         waitForFireInterval = new WaitForSeconds(fireInterval);
         waitForOverdirveFireInterval = new WaitForSeconds(fireInterval /= overdirveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
+        waitDecelerationTime = new WaitForSeconds(decelerationTime);
     }
 
     protected override void OnEnable()
@@ -164,7 +167,8 @@ public class Player : Character
         }
         //moveInput.y在(-1,+1),产生不同方向的旋转角度，旋转轴为红色的X轴
         moveCoroutine = StartCoroutine(MoveCoroutine(accelerationTime, moveInput.normalized * moveSpeed, Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right)));
-        StartCoroutine(MovePositionLimitCoroutine());
+        StopCoroutine(nameof(DecelerationCoroutine));
+        StartCoroutine(nameof(MoveRangeLimatationCoroutine));
     }
 
     void StopMove()
@@ -174,9 +178,8 @@ public class Player : Character
             StopCoroutine(moveCoroutine);
         }
         moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, Vector2.zero, Quaternion.identity));
-        StopCoroutine(nameof(MovePositionLimitCoroutine));
+        StopCoroutine(nameof(DecelerationCoroutine));
     }
-
 
     IEnumerator MoveCoroutine(float time, Vector2 moveVelocity, Quaternion moveRotation)
     {
@@ -194,7 +197,7 @@ public class Player : Character
         }
     }
 
-    IEnumerator MovePositionLimitCoroutine()
+    IEnumerator MoveRangeLimatationCoroutine()
     {
         while (true)
         {
@@ -202,6 +205,13 @@ public class Player : Character
 
             yield return null;
         }
+    }
+
+    IEnumerator DecelerationCoroutine()
+    {
+        yield return decelerationTime;
+
+        StopCoroutine(nameof(MoveRangeLimatationCoroutine));
     }
     #endregion
 
@@ -224,16 +234,16 @@ public class Player : Character
             switch (weaponPower)
             {
                 case 0:
-                    PoolManager.Release(projectile, muzzleMiddle.position);
+                    PoolManager.Release(isOverdirving ? projectileOverdirve : projectile1, muzzleMiddle.position);
                     break;
                 case 1:
-                    PoolManager.Release(projectile, muzzleTop.position);
-                    PoolManager.Release(projectile, muzzleBottom.position);
+                    PoolManager.Release(isOverdirving ? projectileOverdirve : projectile1, muzzleTop.position);
+                    PoolManager.Release(projectile1, muzzleBottom.position);
                     break;
                 case 2:
-                    PoolManager.Release(projectile, muzzleMiddle.position);
-                    PoolManager.Release(projectile1, muzzleTop.position);
-                    PoolManager.Release(projectile2, muzzleBottom.position);
+                    PoolManager.Release(isOverdirving ? projectileOverdirve : projectile1, muzzleMiddle.position);
+                    PoolManager.Release(isOverdirving ? projectileOverdirve : projectile2, muzzleTop.position);
+                    PoolManager.Release(isOverdirving ? projectileOverdirve : projectile3, muzzleBottom.position);
                     break;
                 default:
                     break;

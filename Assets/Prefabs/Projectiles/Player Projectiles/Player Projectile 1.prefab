@@ -148,8 +148,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5303842395408885935}
   - component: {fileID: 5303842395408885934}
-  - component: {fileID: 4737108188347014550}
-  - component: {fileID: -1541230389419037887}
+  - component: {fileID: 8362907502922064516}
+  - component: {fileID: 7164314416060455173}
   m_Layer: 8
   m_Name: Player Projectile 1
   m_TagString: Untagged
@@ -194,8 +194,8 @@ MonoBehaviour:
     volume: 0.3
   damage: 1
   moveSpeed: 15
-  moveDirection: {x: 1, y: 0.05}
---- !u!70 &4737108188347014550
+  moveDirection: {x: 1, y: 0}
+--- !u!70 &8362907502922064516
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,7 +211,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.04, y: 0}
   m_Size: {x: 0.25, y: 0.1}
   m_Direction: 1
---- !u!114 &-1541230389419037887
+--- !u!114 &7164314416060455173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

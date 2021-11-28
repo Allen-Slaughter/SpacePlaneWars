@@ -12,8 +12,19 @@ public class BackgroundScroller : MonoBehaviour
         material = GetComponent<Renderer>().material;
     }
 
-    void Update()
+    IEnumerator Start()
+    {
+        while (true)
+        {
+            material.mainTextureOffset += scrollVelocity * Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    //Challenge without Update
+    /*void Update()
     {
         material.mainTextureOffset += scrollVelocity * Time.deltaTime;
-    }
+    }*/
 }

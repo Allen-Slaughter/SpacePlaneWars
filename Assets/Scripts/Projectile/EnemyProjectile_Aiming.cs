@@ -6,7 +6,7 @@ public class EnemyProjectile_Aiming : Projectile
 {
     void Awake()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        SetTarget(GameObject.FindGameObjectWithTag("Player"));
     }
 
     protected override void OnEnable()
