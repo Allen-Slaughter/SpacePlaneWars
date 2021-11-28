@@ -156,6 +156,7 @@ MonoBehaviour:
   maxHealth: 7
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 7627248091025852541}
+  scorePoint: 100
   deathEnegryBonus: 3
 --- !u!1 &6141127440874144652
 GameObject:
@@ -14701,14 +14702,6 @@ PrefabInstance:
     - target: {fileID: 4357001982556625282, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
       propertyPath: m_Name
       value: UI Health Bar On Head Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5432093878983272730, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5911193426175694925, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
-      propertyPath: fillSpeed
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7129499763891812797, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
       propertyPath: m_Pivot.x

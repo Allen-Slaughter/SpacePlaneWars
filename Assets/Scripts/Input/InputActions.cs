@@ -41,6 +41,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Overdirve"",
+                    ""type"": ""Button"",
+                    ""id"": ""61e67835-de5f-490c-8ffd-0f819de794e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -219,6 +227,28 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee1df8b8-96b6-4808-a9ff-02949093979b"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Overdirve"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1e1f566-04e9-4a38-bdf5-88108a7b9782"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Overdirve"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -252,6 +282,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_Dodge = m_Gameplay.FindAction("Dodge", throwIfNotFound: true);
+        m_Gameplay_Overdirve = m_Gameplay.FindAction("Overdirve", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -304,6 +335,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_Dodge;
+    private readonly InputAction m_Gameplay_Overdirve;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -311,6 +343,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @Dodge => m_Wrapper.m_Gameplay_Dodge;
+        public InputAction @Overdirve => m_Wrapper.m_Gameplay_Overdirve;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -329,6 +362,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Dodge.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
+                @Overdirve.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOverdirve;
+                @Overdirve.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOverdirve;
+                @Overdirve.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOverdirve;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -342,6 +378,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @Overdirve.started += instance.OnOverdirve;
+                @Overdirve.performed += instance.OnOverdirve;
+                @Overdirve.canceled += instance.OnOverdirve;
             }
         }
     }
@@ -360,5 +399,6 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnOverdirve(InputAction.CallbackContext context);
     }
 }

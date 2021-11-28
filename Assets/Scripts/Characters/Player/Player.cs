@@ -40,7 +40,14 @@ public class Player : Character
     [SerializeField] float rollSpeed = 360f;
     [SerializeField] Vector3 dodgeScale = new Vector3(0.5f, 0.5f, 0.5f);
 
+    [Header("---- OVERDIRVE ----")]
+    [SerializeField] int overdirveDodgeFactor = 2;
+    [SerializeField] float overdirveSpeedFactor = 1.2f;
+    [SerializeField] float overdirveFireFactor = 1.2f;
+
     bool isDodging = false;
+    bool isOverdirving = false;
+
     float currentRoll;
     float dodgeDuration;
     float t;
@@ -49,9 +56,11 @@ public class Player : Character
 
     Quaternion previousRotation;
 
-    WaitForFixedUpdate waitForFixedUpdate;
     WaitForSeconds waitForFireInterval;
+    WaitForSeconds waitForOverdirveFireInterval;
     WaitForSeconds waitHealthRegenerateTime;
+
+    WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     Coroutine moveCoroutine;
     Coroutine healthRegenerateCoroutine;
@@ -68,6 +77,11 @@ public class Player : Character
         collider = GetComponent<Collider2D>();
 
         dodgeDuration = maxRoll / rollSpeed;
+        rigidbody.gravityScale = 0f;
+
+        waitForFireInterval = new WaitForSeconds(fireInterval);
+        waitForOverdirveFireInterval = new WaitForSeconds(fireInterval /= overdirveFireFactor);
+        waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
     }
 
     protected override void OnEnable()
@@ -79,6 +93,10 @@ public class Player : Character
         input.onFire += Fire;
         input.onStopFire += StopFire;
         input.onDodge += Dodge;
+        input.onOverdirve += Overdirve;
+
+        PlayerOverdirve.on += OverdirveOn;
+        PlayerOverdirve.off += OverdirveOff;
     }
 
     void OnDisable()
@@ -88,15 +106,14 @@ public class Player : Character
         input.onFire -= Fire;
         input.onStopFire -= StopFire;
         input.onDodge -= Dodge;
+        input.onOverdirve -= Overdirve;
+
+        PlayerOverdirve.on -= OverdirveOn;
+        PlayerOverdirve.off -= OverdirveOff;
     }
 
     void Start()
     {
-        rigidbody.gravityScale = 0f;
-
-        waitForFireInterval = new WaitForSeconds(fireInterval);
-        waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
-
         statsBar_HUD.Initialize(health, maxHealth);
 
         //开始操作角色时激活Game play动作表
@@ -224,7 +241,7 @@ public class Player : Character
 
             AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
 
-            yield return waitForFireInterval;
+            yield return isOverdirving ? waitForOverdirveFireInterval : waitForFireInterval;
         }
     }
 
@@ -265,5 +282,29 @@ public class Player : Character
         collider.isTrigger = false;
         isDodging = false;
     }
+    #endregion
+
+    #region OVERDIRVE
+    void Overdirve()
+    {
+        if (!PlayerEnergy.Instance.IsEnough(PlayerEnergy.MAX)) return;
+
+        PlayerOverdirve.on.Invoke();
+    }
+
+    void OverdirveOn()
+    {
+        isOverdirving = true;
+        dodgeEnegryCost *= overdirveDodgeFactor;
+        moveSpeed *= overdirveSpeedFactor;
+    }
+
+    void OverdirveOff()
+    {
+        isOverdirving = false;
+        dodgeEnegryCost /= overdirveDodgeFactor;
+        moveSpeed /= overdirveSpeedFactor;
+    }
+
     #endregion
 }

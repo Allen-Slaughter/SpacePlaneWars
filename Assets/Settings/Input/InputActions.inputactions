@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Overdirve",
+                    "type": "Button",
+                    "id": "61e67835-de5f-490c-8ffd-0f819de794e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -204,6 +212,28 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee1df8b8-96b6-4808-a9ff-02949093979b",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Overdirve",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1e1f566-04e9-4a38-bdf5-88108a7b9782",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Overdirve",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

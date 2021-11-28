@@ -14,6 +14,7 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
     public event UnityAction onFire = delegate { };
     public event UnityAction onStopFire = delegate { };
     public event UnityAction onDodge = delegate { };
+    public event UnityAction onOverdirve = delegate { };
     InputActions inputActions;
 
     void OnEnable()
@@ -74,6 +75,14 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
         if (context.performed)
         {
             onDodge.Invoke();
+        }
+    }
+
+    public void OnOverdirve(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onOverdirve.Invoke();
         }
     }
 }
