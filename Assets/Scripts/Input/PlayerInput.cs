@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "Player Input")]
-public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
+public class PlayerInput : ScriptableObject, InputActions.IGameplayActions, InputActions.IPauseMenuActions
 {
     //开始移动事件
     public event UnityAction<Vector2> onMove = delegate { };
@@ -15,6 +15,8 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
     public event UnityAction onStopFire = delegate { };
     public event UnityAction onDodge = delegate { };
     public event UnityAction onOverdirve = delegate { };
+    public event UnityAction onPause = delegate { };
+    public event UnityAction onUnPause = delegate { };
     InputActions inputActions;
 
     void OnEnable()
@@ -22,6 +24,7 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
         inputActions = new InputActions();
 
         inputActions.Gameplay.SetCallbacks(this);
+        inputActions.PauseMenu.SetCallbacks(this);
     }
 
     void OnDisable()
@@ -29,20 +32,34 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
         DisableAllInput();
     }
 
-    //禁用所有输入
-    public void DisableAllInput()
+    void SwitchActionMap(InputActionMap actionMap, bool isUIInput)
     {
-        inputActions.Gameplay.Disable();
+        inputActions.Disable();
+        actionMap.Enable();
+
+        if (isUIInput)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
+
+    public void SwitchToDynamicUpdateMode() => InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+
+    public void SwitchToFixedUpdateMode() => InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
+
+    //禁用所有输入
+    public void DisableAllInput() => inputActions.Disable();
 
     //调用Gameplay动作表
-    public void EnableGamePlayInput()
-    {
-        inputActions.Gameplay.Enable();
+    public void EnableGamePlayInput() => SwitchActionMap(inputActions.Gameplay, false);
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    public void EnablePauseMenuInput() => SwitchActionMap(inputActions.PauseMenu, true);
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -83,6 +100,22 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions
         if (context.performed)
         {
             onOverdirve.Invoke();
+        }
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onPause.Invoke();
+        }
+    }
+
+    public void OnUnpause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onUnPause.Invoke();
         }
     }
 }
