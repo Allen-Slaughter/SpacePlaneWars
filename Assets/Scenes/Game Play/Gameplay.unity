@@ -948,6 +948,50 @@ Transform:
   m_Father: {fileID: 1037929616}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &854478928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854478930}
+  - component: {fileID: 854478929}
+  m_Layer: 0
+  m_Name: Time Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &854478929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854478928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b3e36144911e14ab25ea2eab1288c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletTimeScale: 0.1
+--- !u!4 &854478930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854478928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &864424016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,8 +1517,6 @@ MonoBehaviour:
   accelerationTime: 0.35
   decelerationTime: 0.75
   moveRotationAngle: 25
-  paddingX: 0.8
-  paddingY: 0.22
   projectile1: {fileID: 5303842395408885932, guid: 84e5b62e663792f44a8593eb3d0ebfbc, type: 3}
   projectile2: {fileID: 5303842395408885932, guid: f57c98ed5c3a3b94e873c5b98234b137, type: 3}
   projectile3: {fileID: 5303842395408885932, guid: 067bbd12d38868f4b99070a7d3779bb8, type: 3}

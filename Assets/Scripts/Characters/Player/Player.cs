@@ -19,8 +19,6 @@ public class Player : Character
     [SerializeField] float accelerationTime = 3f;
     [SerializeField] float decelerationTime = 3f;
     [SerializeField] float moveRotationAngle = 50f;
-    [SerializeField] float paddingX = 0.2f;
-    [SerializeField] float paddingY = 0.2f;
 
     [Header("---- FIRE ----")]
     [SerializeField] GameObject projectile1;
@@ -49,6 +47,9 @@ public class Player : Character
     bool isDodging = false;
     bool isOverdirving = false;
 
+    readonly float slowMotionDuration = 1f;
+    float paddingX;
+    float paddingY;
     float currentRoll;
     float dodgeDuration;
     float t;
@@ -77,6 +78,10 @@ public class Player : Character
     {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+
+        var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
+        paddingX = size.x / 2f;
+        paddingY = size.y / 2f;
 
         dodgeDuration = maxRoll / rollSpeed;
         rigidbody.gravityScale = 0f;
@@ -129,6 +134,7 @@ public class Player : Character
     {
         base.TakeDamage(damage);
         statsBar_HUD.UpdateStats(health, maxHealth);
+        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
 
         if (gameObject.activeSelf)
         {
@@ -278,6 +284,8 @@ public class Player : Character
         //Make player rotato along X axis   让玩家沿着X轴旋转
         currentRoll = 0f;
 
+        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
+
         while (currentRoll < maxRoll)
         {
             currentRoll += rollSpeed * Time.deltaTime;
@@ -307,6 +315,7 @@ public class Player : Character
         isOverdirving = true;
         dodgeEnegryCost *= overdirveDodgeFactor;
         moveSpeed *= overdirveSpeedFactor;
+        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
     }
 
     void OverdirveOff()
