@@ -6,13 +6,29 @@ public class TimeController : Singleton<TimeController>
 {
     [SerializeField, Range(0f, 2f)] float bulletTimeScale = 0.1f;
 
-    float DefaultFixedDeltaTime;
+    bool isPaused;
+
+    float defaultFixedDeltaTime;
+    float timeScaleBeforePause;
     float t;
 
     protected override void Awake()
     {
         base.Awake();
-        DefaultFixedDeltaTime = Time.fixedDeltaTime;
+        defaultFixedDeltaTime = Time.fixedDeltaTime;
+    }
+
+    public void Pause()
+    {
+        timeScaleBeforePause = Time.timeScale;
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = timeScaleBeforePause;
+        isPaused = false;
     }
 
     public void BulletTime(float duration)
@@ -62,9 +78,12 @@ public class TimeController : Singleton<TimeController>
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / duration;
-            Time.timeScale = Mathf.Lerp(1f, bulletTimeScale, t);
-            Time.fixedDeltaTime = DefaultFixedDeltaTime * Time.timeScale;
+            if (!isPaused)
+            {
+                t += Time.unscaledDeltaTime / duration;
+                Time.timeScale = Mathf.Lerp(1f, bulletTimeScale, t);
+                Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+            }
 
             yield return null;
         }
@@ -76,9 +95,12 @@ public class TimeController : Singleton<TimeController>
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / duration;
-            Time.timeScale = Mathf.Lerp(bulletTimeScale, 1f, t);
-            Time.fixedDeltaTime = DefaultFixedDeltaTime * Time.timeScale;
+            if (!isPaused)
+            {
+                t += Time.unscaledDeltaTime / duration;
+                Time.timeScale = Mathf.Lerp(bulletTimeScale, 1f, t);
+                Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+            }
 
             yield return null;
         }
