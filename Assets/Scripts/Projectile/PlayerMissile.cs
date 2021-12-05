@@ -11,6 +11,13 @@ public class PlayerMissile : PlayerProjectileOverdirve
     [SerializeField] float hightSpeed = 25f;
     [SerializeField] float variableSpeedDelay = 0.5f;
 
+    [Header("==== EXPLOSION ====")]
+    [SerializeField] GameObject explosionVFX = null;
+    [SerializeField] AudioData explosionSFX = null;
+    [SerializeField] LayerMask enemyLayerMask = default;
+    [SerializeField] float explosionRadius = 3f;
+    [SerializeField] float explosionDamage = 100f;
+
     WaitForSeconds waitVariableSpeedDelay;
 
     protected override void Awake()
@@ -23,6 +30,31 @@ public class PlayerMissile : PlayerProjectileOverdirve
     {
         base.OnEnable();
         StartCoroutine(nameof(VariableSpeedCoroutine));
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
+        //Spawn a explosion VFX
+        PoolManager.Release(explosionVFX, transform.position);
+        //Play explosion SFX
+        AudioManager.Instance.PlayRandomSFX(explosionSFX);
+        //Enemies in explosion take AOE damage
+        var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayerMask);
+
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.TakeDamage(explosionDamage);
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 
     IEnumerator VariableSpeedCoroutine()

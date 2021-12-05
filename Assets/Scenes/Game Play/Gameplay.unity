@@ -3299,6 +3299,8 @@ MonoBehaviour:
     size: 30
   - prefab: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
     size: 3
+  - prefab: {fileID: 7203458116342931450, guid: 975f9549f84dd594a84456abeb05e287, type: 3}
+    size: 12
 --- !u!4 &2048920109
 Transform:
   m_ObjectHideFlags: 0
@@ -95883,8 +95885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
   launchSFX:
-    audioClip: {fileID: 8300000, guid: 53622e00a83edfb49a70bcbb9a4eebec, type: 3}
-    volume: 1
+    audioClip: {fileID: 8300000, guid: 99331d0df4c708149b69b11b5a64d2f4, type: 3}
+    volume: 0.5
 --- !u!4 &6435389009486221734
 Transform:
   m_ObjectHideFlags: 0
