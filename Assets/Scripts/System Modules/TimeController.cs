@@ -6,8 +6,6 @@ public class TimeController : Singleton<TimeController>
 {
     [SerializeField, Range(0f, 2f)] float bulletTimeScale = 0.1f;
 
-    bool isPaused;
-
     float defaultFixedDeltaTime;
     float timeScaleBeforePause;
     float t;
@@ -22,13 +20,11 @@ public class TimeController : Singleton<TimeController>
     {
         timeScaleBeforePause = Time.timeScale;
         Time.timeScale = 0f;
-        isPaused = true;
     }
 
     public void UnPause()
     {
         Time.timeScale = timeScaleBeforePause;
-        isPaused = false;
     }
 
     public void BulletTime(float duration)
@@ -78,7 +74,7 @@ public class TimeController : Singleton<TimeController>
 
         while (t < 1f)
         {
-            if (!isPaused)
+            if (GameManager.GameState != GameState.Paused)
             {
                 t += Time.unscaledDeltaTime / duration;
                 Time.timeScale = Mathf.Lerp(1f, bulletTimeScale, t);
@@ -95,7 +91,7 @@ public class TimeController : Singleton<TimeController>
 
         while (t < 1f)
         {
-            if (!isPaused)
+            if (GameManager.GameState != GameState.Paused)
             {
                 t += Time.unscaledDeltaTime / duration;
                 Time.timeScale = Mathf.Lerp(bulletTimeScale, 1f, t);
