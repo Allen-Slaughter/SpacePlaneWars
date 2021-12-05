@@ -6,7 +6,7 @@ public class PlayerProjectile : Projectile
 {
     TrailRenderer trail;
 
-    void Awake()
+    protected virtual void Awake()
     {
         trail = GetComponentInChildren<TrailRenderer>();
 

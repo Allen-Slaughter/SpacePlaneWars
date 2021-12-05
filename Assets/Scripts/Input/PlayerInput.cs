@@ -17,6 +17,7 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions, Inpu
     public event UnityAction onOverdirve = delegate { };
     public event UnityAction onPause = delegate { };
     public event UnityAction onUnPause = delegate { };
+    public event UnityAction onLaunchMissile = delegate { };
     InputActions inputActions;
 
     void OnEnable()
@@ -116,6 +117,14 @@ public class PlayerInput : ScriptableObject, InputActions.IGameplayActions, Inpu
         if (context.performed)
         {
             onUnPause.Invoke();
+        }
+    }
+
+    public void OnLaunchMissile(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onLaunchMissile.Invoke();
         }
     }
 }

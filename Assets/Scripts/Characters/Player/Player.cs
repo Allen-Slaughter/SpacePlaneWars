@@ -71,6 +71,8 @@ public class Player : Character
     new Rigidbody2D rigidbody;
     new Collider2D collider;
 
+    MissileSystem missile;
+
     #endregion
 
     #region UNITY EVENT FUNCTIONS
@@ -78,6 +80,7 @@ public class Player : Character
     {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        missile = GetComponent<MissileSystem>();
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -102,6 +105,7 @@ public class Player : Character
         input.onStopFire += StopFire;
         input.onDodge += Dodge;
         input.onOverdirve += Overdirve;
+        input.onLaunchMissile += LaunchMissile;
 
         PlayerOverdirve.on += OverdirveOn;
         PlayerOverdirve.off += OverdirveOff;
@@ -115,6 +119,7 @@ public class Player : Character
         input.onStopFire -= StopFire;
         input.onDodge -= Dodge;
         input.onOverdirve -= Overdirve;
+        input.onLaunchMissile -= LaunchMissile;
 
         PlayerOverdirve.on -= OverdirveOn;
         PlayerOverdirve.off -= OverdirveOff;
@@ -327,4 +332,9 @@ public class Player : Character
     }
 
     #endregion
+
+    void LaunchMissile()
+    {
+        missile.Launch(muzzleMiddle);
+    }
 }
