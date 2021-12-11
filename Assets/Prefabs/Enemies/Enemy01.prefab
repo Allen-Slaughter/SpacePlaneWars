@@ -117,8 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78dc75e41490c664db8519d1b4d90be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddingX: 0.8
-  paddingY: 0.4
   moveSpeed: 1.5
   moveRotationAngle: 35
   projectiles:
@@ -14697,6 +14695,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 214778051926960353}
     m_Modifications:
+    - target: {fileID: 999018194768761910, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4357001982556625282, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
       propertyPath: m_Name
       value: UI Health Bar On Head Enemy
@@ -14785,6 +14787,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7135932973973993712, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: bdd3e51c8a5c7cd43a1c6340e9bfda13, type: 2}
+    - target: {fileID: 7279318281063599391, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: f48851a2199d41d4e9ae75bc0a6e173a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f052c42e7c54e14898fa5c9741188a2, type: 3}
 --- !u!224 &932399843720048123 stripped

@@ -29215,11 +29215,10 @@ MonoBehaviour:
   accelerationTime: 0.35
   decelerationTime: 0.75
   moveRotationAngle: 25
-  paddingX: 0.8
-  paddingY: 0.22
-  projectile: {fileID: 5303842395408885932, guid: 84e5b62e663792f44a8593eb3d0ebfbc, type: 3}
   projectile1: {fileID: 5303842395408885932, guid: f57c98ed5c3a3b94e873c5b98234b137, type: 3}
   projectile2: {fileID: 5303842395408885932, guid: 067bbd12d38868f4b99070a7d3779bb8, type: 3}
+  projectile3: {fileID: 0}
+  projectileOverdirve: {fileID: 0}
   muzzleMiddle: {fileID: 2059933955}
   muzzleTop: {fileID: 1289502466}
   muzzleBottom: {fileID: 1864817447}
@@ -29235,6 +29234,9 @@ MonoBehaviour:
   maxRoll: 360
   rollSpeed: 360
   dodgeScale: {x: 0.2, y: 0.2, z: 0.2}
+  overdirveDodgeFactor: 2
+  overdirveSpeedFactor: 1.2
+  overdirveFireFactor: 1.2
 --- !u!114 &565457859449118931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29248,6 +29250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enegryBar: {fileID: 0}
+  overdirveInterval: 0.1
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0
@@ -43708,9 +43711,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6435389010079767248}
     m_Modifications:
+    - target: {fileID: 999018194768761910, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: f48851a2199d41d4e9ae75bc0a6e173a, type: 2}
     - target: {fileID: 4357001982556625282, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
       propertyPath: m_Name
       value: UI Health Bar On Head Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432093878983272730, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7129499763891812797, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
       propertyPath: m_Pivot.x
@@ -43795,6 +43806,14 @@ PrefabInstance:
     - target: {fileID: 7129499763891812797, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135932973973993712, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: f48851a2199d41d4e9ae75bc0a6e173a, type: 2}
+    - target: {fileID: 7135932973973993712, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.468
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a7d6a508551a0e4c94460c1c380a98e, type: 3}

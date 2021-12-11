@@ -525,10 +525,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Start
       objectReference: {fileID: 0}
-    - target: {fileID: 8532037483453354795, guid: 6fc18aa6b64518841a1460ab238881a3, type: 3}
-      propertyPath: m_Text
-      value: Start
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fc18aa6b64518841a1460ab238881a3, type: 3}
 --- !u!224 &488699114 stripped
@@ -813,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 164665b2c4f7c72468052d7b8ed5edb5, type: 2}
+  m_Material: {fileID: 2100000, guid: bdd3e51c8a5c7cd43a1c6340e9bfda13, type: 2}
   m_Color: {r: 0, g: 0.5882353, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1822,7 +1818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 164665b2c4f7c72468052d7b8ed5edb5, type: 2}
+  m_Material: {fileID: 2100000, guid: bdd3e51c8a5c7cd43a1c6340e9bfda13, type: 2}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
