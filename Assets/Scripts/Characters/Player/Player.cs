@@ -54,6 +54,7 @@ public class Player : Character
     float dodgeDuration;
     float t;
 
+    Vector2 moveDirection;
     Vector2 previousVelocity;
 
     Quaternion previousRotation;
@@ -143,6 +144,8 @@ public class Player : Character
 
         if (gameObject.activeSelf)
         {
+            Move(moveDirection);
+
             if (regenerateHealth)
             {
                 if (healthRegenerateCoroutine != null)
@@ -178,8 +181,11 @@ public class Player : Character
         {
             StopCoroutine(moveCoroutine);
         }
+
+        moveDirection = moveInput.normalized;
+
         //moveInput.y在(-1,+1),产生不同方向的旋转角度，旋转轴为红色的X轴
-        moveCoroutine = StartCoroutine(MoveCoroutine(accelerationTime, moveInput.normalized * moveSpeed, Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right)));
+        moveCoroutine = StartCoroutine(MoveCoroutine(accelerationTime, moveDirection * moveSpeed, Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right)));
         StopCoroutine(nameof(DecelerationCoroutine));
         StartCoroutine(nameof(MoveRangeLimatationCoroutine));
     }
