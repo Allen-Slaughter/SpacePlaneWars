@@ -25,6 +25,7 @@ public class Player : Character
     [SerializeField] GameObject projectile2;
     [SerializeField] GameObject projectile3;
     [SerializeField] GameObject projectileOverdirve;
+    [SerializeField] ParticleSystem muzzleVFX;
     [SerializeField] Transform muzzleMiddle;
     [SerializeField] Transform muzzleTop;
     [SerializeField] Transform muzzleBottom;
@@ -47,7 +48,9 @@ public class Player : Character
     bool isDodging = false;
     bool isOverdirving = false;
 
-    readonly float slowMotionDuration = 1f;
+    readonly float SlowMotionDuration = 1f;
+    readonly float InvincibleTime = 1f;
+
     float paddingX;
     float paddingY;
     float currentRoll;
@@ -63,6 +66,7 @@ public class Player : Character
     WaitForSeconds waitForOverdirveFireInterval;
     WaitForSeconds waitHealthRegenerateTime;
     WaitForSeconds waitDecelerationTime;
+    WaitForSeconds waitInvincibleTime;
 
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
@@ -94,6 +98,7 @@ public class Player : Character
         waitForOverdirveFireInterval = new WaitForSeconds(fireInterval /= overdirveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
         waitDecelerationTime = new WaitForSeconds(decelerationTime);
+        waitInvincibleTime = new WaitForSeconds(InvincibleTime);
     }
 
     protected override void OnEnable()
@@ -140,11 +145,12 @@ public class Player : Character
     {
         base.TakeDamage(damage);
         statsBar_HUD.UpdateStats(health, maxHealth);
-        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
+        TimeController.Instance.BulletTime(SlowMotionDuration, SlowMotionDuration);
 
         if (gameObject.activeSelf)
         {
             Move(moveDirection);
+            StartCoroutine(nameof(InvincibleCoroutine));
 
             if (regenerateHealth)
             {
@@ -171,6 +177,15 @@ public class Player : Character
         statsBar_HUD.UpdateStats(0f, maxHealth);
         base.Die();
     }
+
+    IEnumerator InvincibleCoroutine()
+    {
+        collider.isTrigger = true;
+
+        yield return waitInvincibleTime;
+
+        collider.isTrigger = false;
+    }
     #endregion
 
     #region MOVE
@@ -196,7 +211,8 @@ public class Player : Character
         {
             StopCoroutine(moveCoroutine);
         }
-        moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, Vector2.zero, Quaternion.identity));
+        moveDirection = Vector2.zero;
+        moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, moveDirection, Quaternion.identity));
         StopCoroutine(nameof(DecelerationCoroutine));
     }
 
@@ -238,11 +254,13 @@ public class Player : Character
 
     void Fire()
     {
+        muzzleVFX.Play();
         StartCoroutine(nameof(FireCoroutine));
     }
 
     void StopFire()
     {
+        muzzleVFX.Stop();
         StopCoroutine(nameof(FireCoroutine));
     }
 
@@ -297,7 +315,7 @@ public class Player : Character
         //Make player rotato along X axis   让玩家沿着X轴旋转
         currentRoll = 0f;
 
-        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
+        TimeController.Instance.BulletTime(SlowMotionDuration, SlowMotionDuration);
 
         while (currentRoll < maxRoll)
         {
@@ -328,7 +346,7 @@ public class Player : Character
         isOverdirving = true;
         dodgeEnegryCost *= overdirveDodgeFactor;
         moveSpeed *= overdirveSpeedFactor;
-        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
+        TimeController.Instance.BulletTime(SlowMotionDuration, SlowMotionDuration);
     }
 
     void OverdirveOff()

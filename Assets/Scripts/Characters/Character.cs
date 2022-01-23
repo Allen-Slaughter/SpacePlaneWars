@@ -42,9 +42,11 @@ public class Character : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
+        if (health == 0) return;
+
         health -= damage;
 
-        if (showOnHeadHealthBar && gameObject.activeSelf)
+        if (showOnHeadHealthBar)
         {
             onHeadHealthBar.UpdateStats(health, maxHealth);
         }
